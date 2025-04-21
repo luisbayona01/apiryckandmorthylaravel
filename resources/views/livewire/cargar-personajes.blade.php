@@ -1,3 +1,4 @@
+
 <div class="p-6 max-w-7xl mx-auto bg-white shadow-md rounded-lg">
     <div class="mb-6 flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <label class="text-sm font-medium mb-2 sm:mb-0">Filtrar por Status:</label>
@@ -81,8 +82,12 @@
             </button>
 
             <div class="text-center">
-
+            @if(!empty($detalleSeleccionado) && !empty($detalleSeleccionado['image']) && Storage::disk('public')->exists($detalleSeleccionado['image']))
+                <img src="{{ Storage::url($detalleSeleccionado['image']) }}" class="w-20 h-20 rounded-full mx-auto">
+            @else
                 <img src="{{ $detalleSeleccionado['image'] ?? '' }}" class="w-20 h-20 rounded-full mx-auto">
+            @endif
+
                 <h2 class="text-lg font-bold mt-2">{{ $detalleSeleccionado['name'] ?? '' }}</h2>
                 <p class="text-gray-600">{{ $detalleSeleccionado['species'] ?? '' }} - {{ $detalleSeleccionado['status'] ?? '' }}</p>
                 <p class="text-gray-500 text-sm mt-1">{{ $detalleSeleccionado['type'] ?? 'N/A' }}</p>
